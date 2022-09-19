@@ -1,103 +1,106 @@
 from org.transcrypt.stubs.browser import *
 import random
 
+
 def insertion_sort(array_list: list) -> list:
-	for outer_index in range(1, len(array_list)):
-			inner_index = outer_index
-			while (inner_index > 0) and (array_list[inner_index] < array_list[inner_index-1]):
-				array_list[inner_index-1], array_list[inner_index] = array_list[inner_index], array_list[inner_index-1]
-				inner_index -= 1
-	return array_list
+    for outer_index in range(1, len(array_list)):
+        inner_index = outer_index
+        while (inner_index > 0) and (array_list[inner_index] < array_list[inner_index-1]):
+            array_list[inner_index -
+                       1], array_list[inner_index] = array_list[inner_index], array_list[inner_index-1]
+            inner_index -= 1
+    return array_list
+
 
 def gen_random_int(number, seed):
-	array = []
-	for i in range(number):
-		array.append(i)
-	random.seed(seed)
-	random.shuffle(array)
-	return array
+    array = []
+    for i in range(number):
+        array.append(i)
+    random.seed(seed)
+    random.shuffle(array)
+    return array
+
 
 def generate():
-	number = 10
-	seed = 200
-	array = gen_random_int(number, seed)
-	array_str = str(array)
-	array_str = array_str.replace("[", "")
-	array_str = array_str.replace("]", "")
-	array_str = array_str + "."
-	# convert the items into one single string 
-	# the number should be separated by a comma
-	# and a full stop should end the string.
+    number = 10
+    seed = 200
+    array = gen_random_int(number, seed)
+    array_str = str(array)
+    array_str = array_str.replace("[", "")
+    array_str = array_str.replace("]", "")
+    array_str = array_str + "."
+    # convert the items into one single string
+    # the number should be separated by a comma
+    # and a full stop should end the string.
 
-	# This line is to placed the string into the HTML
-	# under div section with the id called "generate"	
-	document.getElementById("generate").innerHTML = array_str  
+    # This line is to placed the string into the HTML
+    # under div section with the id called "generate"
+    document.getElementById("generate").innerHTML = array_str
+
 
 def sortnumber1():
-	'''	This function is used in Exercise 1.
-		The function is called when the sort button is clicked.
-		
-		You need to do the following:
-		- get the list of numbers from the "generate" HTML id, use document.getElementById(id).innerHTML
-		- create a list of integers from the string of numbers
-		- call your sort function, either bubble sort or insertion sort
-		- create a string of the sorted numbers and store it in array_str
-	'''
-	array = document.getElementById("generate").innerHTML
-	array_list = array.replace(" ", "")
-	array_list = array_list.replace("[", "")
-	array_list = array_list.replace("]", "")
-	array_list = array_list.replace(".", "")
-	array_list = list(array_list.replace(",", ""))
+    '''	This function is used in Exercise 1.
+            The function is called when the sort button is clicked.
 
-	array_str = insertion_sort(array_list)
-	document.getElementById("sorted").innerHTML = array_str
+            You need to do the following:
+            - get the list of numbers from the "generate" HTML id, use document.getElementById(id).innerHTML
+            - create a list of integers from the string of numbers
+            - call your sort function, either bubble sort or insertion sort
+            - create a string of the sorted numbers and store it in array_str
+    '''
+    array = document.getElementById("generate").innerHTML
+    array_list = array.replace(" ", "")
+    array_list = array_list.replace("[", "")
+    array_list = array_list.replace("]", "")
+    array_list = array_list.replace(".", "")
+    array_list = list(array_list.replace(",", ""))
+
+    array_str = insertion_sort(array_list)
+    document.getElementById("sorted").innerHTML = array_str
+
 
 def sortnumber2():
+    ''' This function is used in Exercise 2.
 
-	print('ok')
+    The function is called when the sort button is clicked.
+    You need to do the following:
+    - Get the numbers from a string variable "value".
+    - Split the string using comma as the separator and convert them to
+    a list of numbers
+    - call your sort function, either bubble sort or insertion sort
+    - create a string of the sorted numbers and store it in array_str
+    hello sean phay
+    '''
 
-	''' This function is used in Exercise 2.
+    # The following line get the value of the text input called "numbers"
+    value = document.getElementsByName("numbers")[0].value
+    #value = '20,30,50,40'
+    # Throw alert and stop if nothing in the text input
 
-	The function is called when the sort button is clicked.
-	You need to do the following:
-	- Get the numbers from a string variable "value".
-	- Split the string using comma as the separator and convert them to
-	a list of numbers
-	- call your sort function, either bubble sort or insertion sort
-	- create a string of the sorted numbers and store it in array_str
-	hello sean phay
-	'''
+    if value == "":
+        window.alert("Your textbox is empty")
+        pass
 
-	# The following line get the value of the text input called "numbers"
-	# value = document.getElementsByName("numbers")[0].value
-	value = '20,30,50,40'
-	# Throw alert and stop if nothing in the text input
+    else:
 
-	if value == "":
-		window.alert("Your textbox is empty")
-		pass
+        string_list = value.split(',')
+        int_list = []
+        for i in range(0, len(string_list)):
+            int_list.append(int(string_list[i]))
+        sorted_list = insertion_sort(int_list)
+        final_str = ''
+        for i in sorted_list:
+            final_str = final_str + i + ', '
+        print(final_str)
+    array_str = final_str
 
-	else:
+    # Your code should start from here
 
-		string_list = value.split(',')
-		int_list = []
-		for i in range(0, len(string_list)):
-			int_list.append(int(string_list[i]))
-		sorted_list = insertion_sort(int_list)
-		array_str = ''
-		for i in sorted_list:
-			array_str+=i
-		print(array_str)
+    # store the final string to the variable array_str
 
-	# Your code should start from here
+    pass
 
-	# store the final string to the variable array_str
+    document.getElementById("sorted").innerHTML = array_str
 
-	pass
-	array_str = None
-
-	document.getElementById("sorted").innerHTML = array_str
 
 sortnumber2()
-
