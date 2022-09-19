@@ -66,6 +66,7 @@ def sortnumber2():
 	a list of numbers
 	- call your sort function, either bubble sort or insertion sort
 	- create a string of the sorted numbers and store it in array_str
+	hello sean phay
 	'''
 
 	# The following line get the value of the text input called "numbers"
@@ -83,7 +84,11 @@ def sortnumber2():
 		int_list = []
 		for i in range(0, len(string_list)):
 			int_list.append(int(string_list[i]))
-		print(int_list)
+		sorted_list = insertion_sort(int_list)
+		array_str = ''
+		for i in sorted_list:
+			array_str+=i
+		print(array_str)
 
 	# Your code should start from here
 
