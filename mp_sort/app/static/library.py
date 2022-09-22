@@ -11,22 +11,17 @@ def insertion_sort(array_list):
 
 
 def gen_random_int(number, seed):
-    array = []
-    for i in range(number):
-        array.append(i)
+    array = [i for i in range(number)]
     random.seed(seed)
     random.shuffle(array)
     return array
 
 def convert_list_str_to_int(array):
-    for i in range(len(array)):
-        array[i] = int(array[i])
-    return array
+    array_l = [int(array[i]) for i in range(len(array))]
+    return array_l
 
 def gen_list_of_str(array):
-    array_str = ""
-    for i in array:
-        array_str = array_str + str(i) + ","
+    array_str = "".join(f"{str(i)}," for i in array)
     array_str = (array_str[:-1]) + "."
     return array_str
 
@@ -50,9 +45,10 @@ def sortnumber1():
     '''
     array = document.getElementById("generate").innerHTML
     array = array.rstrip(".")
-    array_l = array.split(",")
-    array_l = convert_list_str_to_int(array_l)
-    array_str = insertion_sort(array_l)
+    array_list_str = array.split(",")
+    array_list_int = convert_list_str_to_int(array_list_str)
+    sorted_list = insertion_sort(array_list_int)
+    array_str = gen_list_of_str(sorted_list)
     document.getElementById("sorted").innerHTML = array_str
 
 
@@ -72,8 +68,8 @@ def sortnumber2():
         window.alert("Your textbox is empty")
         pass
     else:
-        string_list = value.split(',')
-        int_list = convert_list_str_to_int(string_list)
-        sorted_list = insertion_sort(int_list)
+        array_list_str = value.split(',')
+        array_list_int = convert_list_str_to_int(array_list_str)
+        sorted_list = insertion_sort(array_list_int)
         array_str = gen_list_of_str(sorted_list)
     document.getElementById("sorted").innerHTML = array_str
