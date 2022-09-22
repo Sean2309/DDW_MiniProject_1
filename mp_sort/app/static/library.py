@@ -1,13 +1,11 @@
 from org.transcrypt.stubs.browser import *
 import random
 
-
-def insertion_sort(array_list: list) -> list:
+def insertion_sort(array_list):
     for outer_index in range(1, len(array_list)):
         inner_index = outer_index
         while (inner_index > 0) and (array_list[inner_index] < array_list[inner_index-1]):
-            array_list[inner_index -
-                       1], array_list[inner_index] = array_list[inner_index], array_list[inner_index-1]
+            array_list[inner_index -1], array_list[inner_index] = array_list[inner_index], array_list[inner_index-1]
             inner_index -= 1
     return array_list
 
@@ -20,21 +18,23 @@ def gen_random_int(number, seed):
     random.shuffle(array)
     return array
 
+def convert_list_str_to_int(array):
+    for i in range(len(array)):
+        array[i] = int(array[i])
+    return array
+
+def gen_list_of_str(array):
+    array_str = ""
+    for i in array:
+        array_str = array_str + str(i) + ","
+    array_str = (array_str[:-1]) + "."
+    return array_str
 
 def generate():
     number = 10
     seed = 200
     array = gen_random_int(number, seed)
-    array_str = str(array)
-    array_str = array_str.replace("[", "")
-    array_str = array_str.replace("]", "")
-    array_str = array_str + "."
-    # convert the items into one single string
-    # the number should be separated by a comma
-    # and a full stop should end the string.
-
-    # This line is to placed the string into the HTML
-    # under div section with the id called "generate"
+    array_str = gen_list_of_str(array)
     document.getElementById("generate").innerHTML = array_str
 
 
@@ -49,13 +49,10 @@ def sortnumber1():
             - create a string of the sorted numbers and store it in array_str
     '''
     array = document.getElementById("generate").innerHTML
-    array_list = array.replace(" ", "")
-    array_list = array_list.replace("[", "")
-    array_list = array_list.replace("]", "")
-    array_list = array_list.replace(".", "")
-    array_list = list(array_list.replace(",", ""))
-
-    array_str = insertion_sort(array_list)
+    array = array.rstrip(".")
+    array_l = array.split(",")
+    array_l = convert_list_str_to_int(array_l)
+    array_str = insertion_sort(array_l)
     document.getElementById("sorted").innerHTML = array_str
 
 
@@ -69,38 +66,14 @@ def sortnumber2():
     a list of numbers
     - call your sort function, either bubble sort or insertion sort
     - create a string of the sorted numbers and store it in array_str
-    hello sean phay
     '''
-
-    # The following line get the value of the text input called "numbers"
     value = document.getElementsByName("numbers")[0].value
-    #value = '20,30,50,40'
-    # Throw alert and stop if nothing in the text input
-
     if value == "":
         window.alert("Your textbox is empty")
         pass
-
     else:
-
         string_list = value.split(',')
-        int_list = []
-        for i in range(0, len(string_list)):
-            int_list.append(int(string_list[i]))
+        int_list = convert_list_str_to_int(string_list)
         sorted_list = insertion_sort(int_list)
-        final_str = ''
-        for i in sorted_list:
-            final_str = final_str + i + ', '
-        print(final_str)
-    array_str = final_str
-
-    # Your code should start from here
-
-    # store the final string to the variable array_str
-
-    pass
-
+        array_str = gen_list_of_str(sorted_list)
     document.getElementById("sorted").innerHTML = array_str
-
-
-sortnumber2()
