@@ -1,7 +1,6 @@
 
 
 def mergesort(array, byfunc=None):
-  # splitting the list first
   if len(array) > 1:
     mid = len(array)//2
     left = array[:mid]
